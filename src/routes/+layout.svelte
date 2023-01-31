@@ -1,7 +1,8 @@
 <script lang="ts">
 	import '@picocss/pico/css/pico.min.css';
+	import 'filepond/dist/filepond.css';
 	import '../app.css';
-	
+
 	import { enhance } from '$app/forms';
 	import type { LayoutServerData } from './$types';
 	export let data: LayoutServerData;
@@ -16,8 +17,9 @@
 	<nav>
 		<ul>
 			<li><a href="/">OMR</a></li>
-			{#if data.user }
-			<li><a href="/article">Articles</a></li>
+			{#if data.user}
+				<li><a href="/article">Articles</a></li>
+				<li><a href="/scoring">Scoring</a></li>
 			{/if}
 		</ul>
 		<ul>

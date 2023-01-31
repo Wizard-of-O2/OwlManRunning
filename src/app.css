@@ -19,3 +19,6 @@ a[role=button].warning:disabled, button.warning:disabled {
     --border-color: #dc3545;
     --color: #fff;
 }
+li.filepond--item {
+    list-style-type: none;
+}
