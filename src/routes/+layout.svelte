@@ -6,7 +6,7 @@
 
 	const handleSubmit = () => {
 		const f = document.querySelector('#form') as HTMLFormElement;
-		f.submit();
+		return f.submit();
 	};
 </script>
 
@@ -14,6 +14,9 @@
 	<nav>
 		<ul>
 			<li><a href="/">OMR</a></li>
+			{#if data.user }
+			<li><a href="/article">Articles</a></li>
+			{/if}
 		</ul>
 		<ul>
 			{#if !data.user}

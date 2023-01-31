@@ -14,13 +14,14 @@ export const actions = {
 		if (username === 'snow' && password === '11') {
 			// Save data to cookie
 			const jwt = JSON.stringify({ username: 'snow' });
-			cookies.set('jwt', jwt, { path: '/' });
-			throw redirect(303, '/');
+			cookies.set('jwt', jwt, { path: '/', secure: false });
+			throw redirect(307, '/');
 		}
 		return fail(400, { username, msg: 'wrong username or password.' });
 	},
-	logout: ({ cookies }) => {
-		cookies.delete('jwt');
-		throw redirect(303, '/');
+	logout: ({ cookies, locals }) => {
+		cookies.delete('jwt', { path: '/', secure: false });
+		locals.user = null;
+		throw redirect(302, '/');
 	}
 } satisfies Actions;
