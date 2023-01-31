@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '@picocss/pico/css/pico.min.css';
+	import '../app.css';
+	
 	import { enhance } from '$app/forms';
 	import type { LayoutServerData } from './$types';
 	export let data: LayoutServerData;

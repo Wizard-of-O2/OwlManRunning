@@ -12,13 +12,13 @@
 	<thead>
 		<tr>
 			<th>title</th>
-			<th>username</th>
+			<th style="width: 10%;">username</th>
 		</tr>
 	</thead>
 	<tbody>
 		{#each data.articles as article (article._id)}
 			<tr>
-				<td>{article.title}</td>
+				<td><a href="/article/{article._id}">{article.title}</a></td>
 				<td>{article.author}</td>
 			</tr>
 		{/each}

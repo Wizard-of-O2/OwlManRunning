@@ -6,7 +6,8 @@ import { Article, type IArticle } from '$lib/model/Article';
 
 export const load = (async ({ locals }) => {
 	if (!locals.user) throw error(401, 'Unauthorize');
-	const result = await Article.find({}).lean();
+	const result = await Article.find({}).sort('-_id').lean();
+
 	return { articles: JSON.parse(JSON.stringify(result)) };
 }) satisfies PageServerLoad;
 
