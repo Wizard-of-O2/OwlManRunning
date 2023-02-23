@@ -18,6 +18,5 @@ const articleSchema = new mongoose.Schema<IArticle>({
 if (!mongoose.models.Article) {
   mongoose.model<IArticle>('Article', articleSchema);
 }
-const { Article } = mongoose.models;
 
-export { Article };
+export const Article = mongoose.models.Article;
