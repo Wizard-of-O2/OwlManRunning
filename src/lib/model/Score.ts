@@ -1,4 +1,4 @@
-import mongoose, { Types } from 'mongoose';
+import mongoose, { Types, Model } from 'mongoose';
 
 // create interface
 export interface IScore {
@@ -6,6 +6,7 @@ export interface IScore {
   path: string;
   user: Types.ObjectId;
   createAt: Date;
+  status?: string;
 }
 
 // create schema
@@ -14,11 +15,8 @@ const scoreSchema = new mongoose.Schema<IScore>({
   user: { type: mongoose.Schema.Types.ObjectId, required: true },
   path: { type: String, required: true },
   createAt: { type: Date, requiured: true },
+  status: { type: String },
 });
 
 // create model
-if (!mongoose.models.Score) {
-  mongoose.model<IScore>('Score', scoreSchema);
-}
-
-export const Score = mongoose.models.Score;
+export const Score = mongoose.model<IScore>('Score', scoreSchema);

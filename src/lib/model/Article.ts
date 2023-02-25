@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 // create interface
 export interface IArticle {
@@ -15,8 +15,4 @@ const articleSchema = new mongoose.Schema<IArticle>({
 });
 
 // create model
-if (!mongoose.models.Article) {
-  mongoose.model<IArticle>('Article', articleSchema);
-}
-
-export const Article = mongoose.models.Article;
+export const Article = mongoose.model<IArticle>('Article', articleSchema);

@@ -13,11 +13,13 @@
 	<thead>
 		<tr>
 			<th>Title</th>
+			<th>Status</th>
 		</tr>
 	</thead>
 	{#each data.scores as score (score._id)}
 		<tr>
 			<td>{score.title}</td>
+			<td>{score.status ?? ''}</td>
 		</tr>
 	{/each}
 	<tbody />
