@@ -24,4 +24,4 @@ npm run dev
 |변수명|용도|예시값|
 |-|-|-|
 |MONGODB_URL|데이터베이스 주소|mongodb://~~~~~|
-|AMQP_URL|RabbitMQ 주소|x.x.x.x|
+|AMQP_HOST|RabbitMQ 주소|x.x.x.x|
