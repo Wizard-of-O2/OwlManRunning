@@ -5,7 +5,7 @@ import { Score, type IScore } from '$lib/model/Score';
 import mongoose, { type HydratedDocument } from 'mongoose';
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const title = formData.get('title') as string;
     const file = formData.get('file') as File;
@@ -26,7 +26,7 @@ export const actions = {
 		const score: HydratedDocument<IScore> = new Score({ 
 			title,
 			path,
-			user: new mongoose.Types.ObjectId('63d27d96731dee61afd00b77'),
+			user: new mongoose.Types.ObjectId(locals.user!.user_id),
 			createAt: new Date(),
 		});
 		await score.save();
