@@ -13,7 +13,11 @@ export const actions = {
 		// TODO: check username and password
 		if (username === 'snow' && password === '11') {
 			// Save data to cookie
-			const jwt = JSON.stringify({ username: 'snow', user_id: '111111111111111111111111' });
+			const jwt = JSON.stringify({ username: 'snow', userId: '111111111111111111111111' });
+			cookies.set('jwt', jwt, { path: '/', secure: false });
+			throw redirect(307, '/');
+		} else if (username === 'test' && password === '11') {
+			const jwt = JSON.stringify({ username: 'snow', userId: '222222222222222222222222' });
 			cookies.set('jwt', jwt, { path: '/', secure: false });
 			throw redirect(307, '/');
 		}

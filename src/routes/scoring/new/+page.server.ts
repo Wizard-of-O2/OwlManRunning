@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type { Actions } from './$types';
 import { Score, type IScore } from '$lib/model/Score';
 import mongoose, { type HydratedDocument } from 'mongoose';
+import { redirect } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -26,11 +27,11 @@ export const actions = {
 		const score: HydratedDocument<IScore> = new Score({ 
 			title,
 			path,
-			user: new mongoose.Types.ObjectId(locals.user!.user_id),
+			user: new mongoose.Types.ObjectId(locals.user!.userId),
 			createAt: new Date(),
 		});
 		await score.save();
 
-		return {};
+		throw redirect(303, '/scoring');
 	}
 } satisfies Actions;
