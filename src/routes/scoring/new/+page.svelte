@@ -8,7 +8,11 @@
 <h1>New Scoring</h1>
 <form method="POST" use:enhance>
 	<input type="text" name="title" placeholder="Title" required />
-	<input type="file" name="file" required accept="image/jpeg, image/png, application/pdf"/>
+	<select name="type" required>
+		<option value="type_a">Type A</option>
+		<option value="type_b">Type B</option>
+	</select>
+	<input type="file" name="file" required accept="application/pdf"/>
 	<div class="btn-container">
 		<button type="submit" class="submit-btn">Submit</button>
 		<a href="/scoring" class="secondary" role="button">Cancel</a>

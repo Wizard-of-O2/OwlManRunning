@@ -4,6 +4,7 @@ import mongoose, { Types, Model } from 'mongoose';
 export interface IScore {
 	title: string;
   path: string;
+  type: string;
   user: Types.ObjectId;
   createAt: Date;
   status?: string;
@@ -12,8 +13,9 @@ export interface IScore {
 // create schema
 const scoreSchema = new mongoose.Schema<IScore>({
   title: { type: String, required: true },
-  user: { type: mongoose.Schema.Types.ObjectId, required: true },
   path: { type: String, required: true },
+  type: { type: String, required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, required: true },
   createAt: { type: Date, requiured: true },
   status: { type: String },
 });

@@ -4,7 +4,7 @@ import amqp from 'amqplib';
 export const sendToQueue = async (msg: string) => {
   const queue = 'omr';
 
-	const conn = await amqp.connect(`amqp://${env.AMQP_URL}`);
+	const conn = await amqp.connect(`amqp://${env.AMQP_HOST}`);
 	const chan = await conn.createChannel();
 
 	await chan.assertQueue(queue, {

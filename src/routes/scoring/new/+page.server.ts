@@ -10,6 +10,7 @@ export const actions = {
 	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const title = formData.get('title') as string;
+		const type = formData.get('type') as string;
 		const file = formData.get('file') as File;
 
 		const uid = uuidv4();
@@ -25,6 +26,7 @@ export const actions = {
 		const score: HydratedDocument<IScore> = new Score({
 			title,
 			path,
+			type,
 			user: new mongoose.Types.ObjectId(locals.user!.userId),
 			createAt: new Date(),
 			status: 'processing'
