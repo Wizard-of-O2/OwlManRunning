@@ -22,23 +22,13 @@ def process(src_path, type_name):
 
     image_files = pdf_to_images(src_path, temp_input_path)
     for (page_idx, file) in image_files:
-        # for file in ["temp/input/image_0.png"]:
         preprocessed = pre_process_image(file, temp_preprocessed_path)
         page_result = read_marker(preprocessed, model)
         result_list[f"{page_idx}"] = page_result
 
     debug_log("done.")
-    # return result_list
-    return convert_result(result_list)
+    return result_list
 
-def convert_result(result_list):
-    ret = []
-    for key1 in result_list:
-        o1 = {}
-        for val in result_list[key1]:
-            o1.update(val)
-        ret.append(o1)
-    return ret
 
 if __name__ == '__main__':
     n = len(sys.argv)
