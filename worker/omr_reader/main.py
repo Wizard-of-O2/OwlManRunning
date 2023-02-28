@@ -18,13 +18,15 @@ def process(src_path, type_name):
 
     model = load_model(type_name)
 
-    result_list = {}
+    # result_list = {}
+    result_list = []
 
     image_files = pdf_to_images(src_path, temp_input_path)
     for (page_idx, file) in image_files:
         preprocessed = pre_process_image(file, temp_preprocessed_path)
         page_result = read_marker(preprocessed, model)
-        result_list[f"{page_idx}"] = page_result
+        # result_list[f"{page_idx}"] = page_result
+        result_list.append(page_result)
 
     debug_log("done.")
     return result_list

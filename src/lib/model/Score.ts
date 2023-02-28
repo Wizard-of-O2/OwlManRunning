@@ -8,6 +8,11 @@ export interface IScore {
   user: Types.ObjectId;
   createAt: Date;
   status?: string;
+  result?: any[];
+}
+
+export interface IResult {
+  [key: string]: number[] | string | number;
 }
 
 // create schema
@@ -18,6 +23,7 @@ const scoreSchema = new mongoose.Schema<IScore>({
   user: { type: mongoose.Schema.Types.ObjectId, required: true },
   createAt: { type: Date, requiured: true },
   status: { type: String },
+  result: Array<IResult>,
 });
 
 // create model

@@ -18,7 +18,7 @@
 	</thead>
 	{#each data.scores as score (score._id)}
 		<tr>
-			<td>{score.title}</td>
+			<td><a href="/scoring/{score._id}">{score.title}</a></td>
 			<td>{score.status ?? ''}</td>
 		</tr>
 	{/each}
