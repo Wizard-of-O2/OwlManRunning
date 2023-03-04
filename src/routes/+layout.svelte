@@ -18,6 +18,7 @@
 			<li><a href="/">OMR</a></li>
 			{#if data.user}
 				<li><a href="/scoring">Scoring</a></li>
+				<li><a href="/answer">Answer</a></li>
 			{/if}
 		</ul>
 		<ul>

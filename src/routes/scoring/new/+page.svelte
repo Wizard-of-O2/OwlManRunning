@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { PageServerData } from './$types';
+
+	export let data: PageServerData;
 </script>
 
 <svelte:head>
@@ -11,6 +14,11 @@
 	<select name="type" required>
 		<option value="type_a">Type A</option>
 		<option value="type_b">Type B</option>
+	</select>
+	<select name="answer">
+		{#each data.answers as answer(answer._id)}
+		<option value="{answer._id}">{answer.title}</option>
+		{/each}
 	</select>
 	<input type="file" name="file" required accept="application/pdf"/>
 	<div class="btn-container">

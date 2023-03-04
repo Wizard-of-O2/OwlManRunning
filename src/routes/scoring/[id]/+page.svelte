@@ -19,7 +19,11 @@
 </script>
 
 <h2>{data?.score?.title}</h2>
-<span>Type: {data?.score?.type}</span>
+<p>
+	Type: {data?.score?.type}<br />
+	Answer: {data?.score?.answer_title ?? ''}
+</p>
+
 {#if data?.score?.type === 'type_a'}
 	<TypeA {list} />
 {:else if data?.score?.type === 'type_b'}
