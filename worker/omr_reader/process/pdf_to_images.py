@@ -20,7 +20,7 @@ def pdf_to_images(src_path, dst_path):
     images = convert_from_path(src_path)
     page_idx = 0
     for image in images:
-        result_file_name = f"image_{image_idx}.png"
+        result_file_name = f"image_{image_idx + 1}.png"
 
         image = image.resize((1656, 2338))
         result_path = dst_path + "/" + result_file_name
