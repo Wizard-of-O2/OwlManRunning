@@ -13,7 +13,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each data.answers as answer}
+		{#each data.answers as answer(answer._id)}
 			<tr>
 				<td>{answer.title}</td>
         <td>{answer.type}</td>
