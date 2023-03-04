@@ -1,5 +1,9 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import { env } from '$env/dynamic/private';
+
+import '$lib/model/Answer'
+import '$lib/model/Article'
+import '$lib/model/Score'
 
 const url = env.MONGODB_URL;
 if (url) {
