@@ -20,7 +20,7 @@ def make_result_image(src_image_path, marker_info_list, answer_model, page_resul
         for model in marker_info_list:
             if model.name == marker_key:
                 for answer in page_result[marker_key]:
-                    _draw_check_mark(overlay, image_width, image_height, model, answer, -10, (0, 255, 0))
+                    _draw_check_mark(overlay, image_width, image_height, model, answer, -10, (255, 0, 0))
                     break
     alpha = 0.4
     result = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
