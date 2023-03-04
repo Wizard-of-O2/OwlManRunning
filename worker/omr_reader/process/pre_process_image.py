@@ -89,7 +89,16 @@ def pre_process_image(image_path, dst_path):
     transform_mat = cv2.getPerspectiveTransform(src_points, dst_points)
     result_image = cv2.warpPerspective(black_and_white_image, transform_mat, (page_width, page_height))
     result_image = cv2.rotate(result_image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    dst_image_path = dst_path + "/" + image_name
-    debug_log(f"preprocessed file image_name = {dst_image_path}")
-    cv2.imwrite(dst_image_path, result_image)
-    return dst_image_path
+
+    dst_preprocessed_image_path = dst_path + "/" + image_name
+    cv2.imwrite(dst_preprocessed_image_path, result_image)
+
+    original_rotated_image = cv2.warpPerspective(original_image, transform_mat, (page_width, page_height))
+    original_rotated_image = cv2.rotate(original_rotated_image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    dst_rotated_image_path = dst_path + "/rotated_" + image_name
+    cv2.imwrite(dst_rotated_image_path, original_rotated_image)
+
+    debug_log(f"rotated file image_name = {dst_rotated_image_path}")
+    debug_log(f"preprocessed file image_name = {dst_preprocessed_image_path}")
+
+    return (dst_rotated_image_path, dst_preprocessed_image_path)
