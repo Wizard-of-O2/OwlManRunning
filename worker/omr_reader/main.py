@@ -12,6 +12,15 @@ from process.read_marker import read_marker
 from util.debug_log import debug_log
 
 
+def _read_answer_model(answer_path):
+    with open(answer_path) as f:
+        if not f:
+            debug_log("Cannot open answer file.")
+            return
+        json_data = json.load(f)
+    return json_data
+
+
 def process(src_path, type_name, answer_path):
     temp_input_path = "temp/input"
     temp_preprocessed_path = "temp/preprocessed"
@@ -26,19 +35,24 @@ def process(src_path, type_name, answer_path):
     os.makedirs(result_image_directory, exist_ok=True)
 
     model = load_model(type_name)
+    answer_model = None
+    if answer_path:
+        answer_model = _read_answer_model(answer_path)
 
-    result_list = {}
+    result_list = []
 
     image_files = pdf_to_images(src_path, temp_input_path)
     for (page_idx, file) in image_files:
+        # for (page_idx, file) in [(0, "temp/input/image_14.png")]:
         (rotated, preprocessed) = pre_process_image(file, temp_preprocessed_path)
         page_result = read_marker(preprocessed, model)
 
-        if answer_path:
-            result_image_path = make_result_image(rotated, model, answer_path, result_image_directory, page_idx)
+        if answer_model:
+            result_image_path = make_result_image(rotated, model, answer_model, page_result, result_image_directory,
+                                                  page_idx)
             page_result["result_image"] = result_image_path
 
-        result_list[f"{page_idx}"] = page_result
+        result_list.append(page_result)
 
     debug_log("done.")
     return result_list
