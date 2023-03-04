@@ -23,7 +23,7 @@ export const actions = {
 		const buf = Buffer.from(await file.arrayBuffer());
 		const path = `uploads/${uid}`;
 		const filename = file.name;
-		fs.writeFileSync(path, buf);
+		fs.writeFileSync(`${path}/${filename}`, buf);
 
 		// create
 		const score: HydratedDocument<IScore> = new Score({
