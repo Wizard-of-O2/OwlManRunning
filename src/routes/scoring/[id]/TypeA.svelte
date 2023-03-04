@@ -1,8 +1,12 @@
 <script lang="ts">
-	import type { IResult } from '$lib/model/Score';
+	interface Record {
+		page_no: number;
+		[key: string]: number | number[];
+	};
 
-	export let list: IResult[];
-  let range1 = [...Array(60).keys()];
+	export let path: string;
+	export let list: Record[];
+	let range1 = [...Array(60).keys()];
 </script>
 
 <figure>
@@ -18,24 +22,24 @@
 			</tr>
 			<tr>
 				{#each range1 as r}
-					<th>{r+1}</th>
+					<th>{r + 1}</th>
 				{/each}
 				{#each range1 as r}
-					<th>{r+1}</th>
+					<th>{r + 1}</th>
 				{/each}
 			</tr>
 		</thead>
 		<tbody>
 			{#each list as r (r.page_no)}
 				<tr>
-					<td>{r.page_no}</td>
+					<td><a href="/{path}/result/result_{r.page_no}.png">{r.page_no}</a></td>
 					<td>{r.centre_number}</td>
 					<td>{r.student_number}</td>
 					{#each range1 as rr}
-						<td>{r[`answer_0_${rr+1}`]}</td>
+						<td>{r[`answer_0_${rr + 1}`]}</td>
 					{/each}
 					{#each range1 as rr}
-						<td>{r[`answer_1_${rr+1}`]}</td>
+						<td>{r[`answer_1_${rr + 1}`]}</td>
 					{/each}
 				</tr>
 			{/each}

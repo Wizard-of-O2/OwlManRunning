@@ -6,7 +6,7 @@
 	import TypeB from './TypeB.svelte';
 
 	export let data: PageServerData;
-	$: list = data?.score?.result ?? [];
+	$: list = data.score.result ?? [];
 
 	const handleDelete = () => {
 		goto('/scoring');
@@ -18,15 +18,15 @@
 	};
 </script>
 
-<h2>{data?.score?.title}</h2>
+<h2>{data.score.title}</h2>
 <p>
-	Type: {data?.score?.type}<br />
-	Answer: {data?.score?.answer_title ?? ''}
+	Type: {data.score.type}<br />
+	Answer: {data.score.answer_title ?? ''}
 </p>
 
-{#if data?.score?.type === 'type_a'}
-	<TypeA {list} />
-{:else if data?.score?.type === 'type_b'}
+{#if data.score.type === 'type_a'}
+	<TypeA {list} path={data.score.path}/>
+{:else if data?.score.type === 'type_b'}
 	<TypeB {list} />
 {/if}
 <div class="btn-container">

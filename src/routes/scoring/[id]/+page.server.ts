@@ -1,3 +1,4 @@
+import type { IAnswer } from '$lib/model/Answer';
 import { Score, type IResult } from '$lib/model/Score';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
@@ -22,7 +23,8 @@ export const load = (async ({ params, locals }) => {
 			score: {
 				title: score.title,
 				type: score.type,
-        answer_title: score.answer?.title,
+				path: score.path,
+				answer_title: (score.answer as IAnswer).title,
 				result: conv
 			}
 		};
@@ -38,13 +40,16 @@ export const load = (async ({ params, locals }) => {
 			score: {
 				title: score.title,
 				type: score.type,
-        answer_title: score.answer?.title,
+				path: score.path,
+				answer_title: (score.answer as IAnswer).title,
 				result: conv
 			}
 		};
 	}
 
-	return {};
+	return {
+		score: {}
+	};
 }) satisfies PageServerLoad;
 
 const makeName = (o: IResult, keyHead: string) => {

@@ -1,4 +1,5 @@
 import mongoose, { Types, Model } from 'mongoose';
+import type { IAnswer } from './Answer';
 
 // create interface
 export interface IScore {
@@ -6,7 +7,7 @@ export interface IScore {
 	path: string;
 	filename: string;
 	type: string;
-	answer?: Types.ObjectId;
+	answer?: Types.ObjectId | IAnswer;
 	user: Types.ObjectId;
 	createAt: Date;
 	status?: string;
@@ -14,6 +15,7 @@ export interface IScore {
 }
 
 export interface IResult {
+	page_no: number;
 	[key: string]: number[] | string | number;
 }
 
