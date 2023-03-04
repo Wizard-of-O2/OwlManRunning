@@ -32,7 +32,8 @@
 		<tbody>
 			{#each list as r (r.page_no)}
 				<tr>
-					<td><a href="/{path}/result/result_{r.page_no}.png">{r.page_no}</a></td>
+					<td><a href="https://objectstorage.ap-seoul-1.oraclecloud.com/n/cnqwgzok7slt/b/bucket-1/o/{path}/result_{r.page_no}.png"
+								target="_blank" rel="noreferrer">{r.page_no}</a></td>
 					<td>{r.centre_number}</td>
 					<td>{r.student_number}</td>
 					{#each range1 as rr}
