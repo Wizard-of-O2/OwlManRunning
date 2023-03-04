@@ -39,10 +39,11 @@ def process(src_path, type_name, answer_path):
     if answer_path:
         answer_model = _read_answer_model(answer_path)
 
-    result_list = {}
+    result_list = []
 
     image_files = pdf_to_images(src_path, temp_input_path)
     for (page_idx, file) in image_files:
+        # for (page_idx, file) in [(0, "temp/input/image_14.png")]:
         (rotated, preprocessed) = pre_process_image(file, temp_preprocessed_path)
         page_result = read_marker(preprocessed, model)
 
@@ -51,7 +52,7 @@ def process(src_path, type_name, answer_path):
                                                   page_idx)
             page_result["result_image"] = result_image_path
 
-        result_list[f"{page_idx}"] = page_result
+        result_list.append(page_result)
 
     debug_log("done.")
     return result_list
