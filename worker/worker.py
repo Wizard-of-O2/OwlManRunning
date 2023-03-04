@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 upload_path = os.environ['UPLOAD_PATH']
 
 queue_name = 'omr'
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=os.environ['AMQP_HOST']))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=os.environ['AMQP_HOST'], heartbeat=120))
 channel = connection.channel()
 
 client = MongoClient(os.environ['MONGODB_URL'])
