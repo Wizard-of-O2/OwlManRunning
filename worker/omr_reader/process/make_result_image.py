@@ -2,7 +2,7 @@ import cv2
 
 
 def make_result_image(src_image_path, marker_info_list, answer_model, page_result, dst_directory, index):
-    dst_path = f"{dst_directory}/result_{index}.png"
+    dst_path = f"{dst_directory}/result_{index + 1}.png"
 
     image = cv2.imread(src_image_path)
     image_width = image.shape[1]
