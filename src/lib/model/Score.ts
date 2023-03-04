@@ -4,6 +4,7 @@ import mongoose, { Types, Model } from 'mongoose';
 export interface IScore {
 	title: string;
 	path: string;
+	filename: string;
 	type: string;
 	answer?: Types.ObjectId;
 	user: Types.ObjectId;
@@ -20,6 +21,7 @@ export interface IResult {
 const scoreSchema = new mongoose.Schema<IScore>({
 	title: { type: String, required: true },
 	path: { type: String, required: true },
+	filename: { type: String, required: true },
 	type: { type: String, required: true },
 	answer: { type: mongoose.Schema.Types.ObjectId, ref: 'Answer' },
 	user: { type: mongoose.Schema.Types.ObjectId, required: true },

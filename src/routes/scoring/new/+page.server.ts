@@ -21,13 +21,15 @@ export const actions = {
 
 		// save files
 		const buf = Buffer.from(await file.arrayBuffer());
-		const path = `uploads/${uid}/${file.name}`;
+		const path = `uploads/${uid}`;
+		const filename = file.name;
 		fs.writeFileSync(path, buf);
 
 		// create
 		const score: HydratedDocument<IScore> = new Score({
 			title,
 			path,
+			filename,
 			type,
 			answer: answer ? new mongoose.Types.ObjectId(answer.toString()) : null,
 			user: new mongoose.Types.ObjectId(locals.user!.userId),
