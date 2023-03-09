@@ -19,10 +19,12 @@ def _gray_threshold(hist):
     return 254
 
 
-def _marker_point(connected_components, left, top, width, height):
+def _marker_point(connected_components, centroids, left, top, width, height):
     biggest_area_size = 0
-    result = (left, top, width, height)
-    for component in connected_components:
+    result = (left, top, width, height, left + width / 2, top + height / 2)
+    for i in range(len(connected_components)):
+        component = connected_components[i]
+        centroid = centroids[i]
         (x, y, w, h, area) = component
         if area < 8 * 8 or 50 * 50 < area:
             continue
@@ -34,7 +36,7 @@ def _marker_point(connected_components, left, top, width, height):
             continue
         if biggest_area_size < area:
             biggest_area_size = area
-            result = (x, y, w, h)
+            result = (x, y, w, h, centroid[0], centroid[1])
     return result
 
 
@@ -60,25 +62,24 @@ def pre_process_image(image_path, dst_path):
     marker_right = 100
     marker_top = 57
     marker_bottom = 50
-    lt = _marker_point(stats, 0, 0, marker_left * 2, marker_top * 2)
-    rt = _marker_point(stats, page_width - marker_right * 2, 0, marker_right * 2, marker_top * 2)
-    lb = _marker_point(stats, 0, page_height - marker_bottom * 2, marker_left * 2, marker_bottom * 2)
-    rb = _marker_point(stats, page_width - marker_right * 2, page_height - marker_bottom * 2, marker_right * 2,
-                       marker_bottom * 2)
+    lt = _marker_point(stats, centroids, 0, 0, marker_left * 2, marker_top * 2)
+    rt = _marker_point(stats, centroids, page_width - marker_right * 2, 0, marker_right * 2, marker_top * 2)
+    lb = _marker_point(stats, centroids, 0, page_height - marker_bottom * 2, marker_left * 2, marker_bottom * 2)
+    rb = _marker_point(stats, centroids, page_width - marker_right * 2, page_height - marker_bottom * 2, marker_right * 2, marker_bottom * 2)
 
     if lt[2] * lt[3] + lb[2] * lb[3] < rt[2] * rt[3] + rb[2] * rb[3]:
         src_points = np.float32([
-            [lt[0] + lt[2] / 2, lt[1] + lt[3] / 2],
-            [rt[0] + rt[2] / 2, rt[1] + rt[3] / 2],
-            [lb[0] + lb[2] / 2, lb[1] + lb[3] / 2],
-            [rb[0] + rb[2] / 2, rb[1] + rb[3] / 2],
+            [lt[4], lt[5]],
+            [rt[4], rt[5]],
+            [lb[4], lb[5]],
+            [rb[4], rb[5]],
         ])
     else:
         src_points = np.float32([
-            [rb[0] + rb[2] / 2, rb[1] + rb[3] / 2],
-            [lb[0] + lb[2] / 2, lb[1] + lb[3] / 2],
-            [rt[0] + rt[2] / 2, rt[1] + rt[3] / 2],
-            [lt[0] + lt[2] / 2, lt[1] + lt[3] / 2],
+            [rb[4], rb[5]],
+            [lb[4], lb[5]],
+            [rt[4], rt[5]],
+            [lt[4], lt[5]],
         ])
     dst_points = np.float32([
         [marker_left, marker_top],
