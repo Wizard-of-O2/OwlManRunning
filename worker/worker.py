@@ -6,6 +6,9 @@ from oci.config import from_file
 from oci.object_storage import ObjectStorageClient
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 oci_config = from_file()
 oci_namespace = "cnqwgzok7slt"
