@@ -25,3 +25,16 @@ npm run dev
 |-|-|-|
 |MONGODB_URL|데이터베이스 주소|mongodb://~~~~~|
 |AMQP_HOST|RabbitMQ 주소|x.x.x.x|
+|UPLOAD_PATH|파이썬에서 사용하는 uploads 폴더의 위치|
+
+## 파이썬 관련 처리
+### Dependency 설치
+```
+cd worker
+python -m pip install -r requirements.txt
+```
+
+### python 실행
+```
+pythom worker.py
+```
