@@ -34,6 +34,10 @@ cd worker
 python -m pip install -r requirements.txt
 ```
 
+### Poppler 설치
+공식 홈페이지 참조  
+https://poppler.freedesktop.org
+
 ### python 실행
 ```
 pythom worker.py
